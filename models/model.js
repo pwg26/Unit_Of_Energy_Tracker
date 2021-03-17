@@ -34,31 +34,6 @@ const workoutSchema = new Schema({
       },
     },
   ],
-
-  totalDuration: {
-    type: Number,
-    default: 0,
-  },
-  numExercises: {
-    type: Number,
-    default: 0,
-  },
-  totalWeight: {
-    type: Number,
-    default: 0,
-  },
-  totalSets: {
-    type: Number,
-    default: 0,
-  },
-  totalReps: {
-    type: Number,
-    default: 0,
-  },
-  totalDistance: {
-    type: Number,
-    default: 0,
-  },
 });
 
 const Workout = mongoose.model("Workout", workoutSchema);

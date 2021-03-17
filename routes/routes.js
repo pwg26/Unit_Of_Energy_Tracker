@@ -33,19 +33,37 @@ router.get("/api/workouts", (req, res) => {
 
 //create new workout
 router.post("/api/workouts", ({ body }, res) => {
-  WO.create(body).then((dbWorkout) => {
-    res.json(dbWorkout);
-  });
-});
-
-//add excerise to created workout
-router.put("/api/workouts/:id", ({ params, body }, res) => {
-  WO.insertMany(body)
+  WO.create(body)
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
     .catch((err) => {
       res.status(400).json(err);
+    });
+});
+
+//add excerise to created workout
+router.put("/api/workouts/:id", (req, res) => {
+  WO.findOneAndUpdate(
+    { _id: req.params.id },
+    { $push: { exercises: req.body } },
+    { new: true }
+  )
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
+
+// add last 7 workouts to fitness tracking page
+router.get("/api/workouts/range", (req, res) => {
+  WO.find({})
+    .sort({ day: -1 })
+    .limit(7)
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
     });
 });
 
