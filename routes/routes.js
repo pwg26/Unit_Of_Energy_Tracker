@@ -1,72 +1,3 @@
-// var path = require("path");
-// const Workout = require("../models/model.js");
-// const router = require("express").Router();
-
-// // HTML Routes
-
-// module.exports = function (router) {
-//   // HTML Routes================================================================
-//   // moves to exercise page
-//   router.get("/exercise", function (req, res) {
-//     res.sendFile(path.join(__dirname, "../public/exercise.html"));
-//   });
-
-//   //   moves to stat page
-//   router.get("/stats", function (req, res) {
-//     res.sendFile(path.join(__dirname, "../public/stats.html"));
-//   });
-
-//   // API Routes================================================================
-
-//   //   get last workout
-//   router.get("/api/workouts", (req, res) => {
-//     Workout.find({})
-//       .sort({ date: -1 })
-//       .then(
-//         ((dbWorkout) => {
-//           res.json(dbWorkout);
-//         }).catch((err) => {
-//           res.status(400).json(err);
-//         })
-//       );
-//   });
-
-//   //   add exercise
-//   router.put("/api/workouts/:id", ({ body, params }, res) => {
-//     Workout.insert({ _id: params.id, body })
-//       .then((dbWorkout) => {
-//         res.json(dbWorkout);
-//       })
-//       .catch((err) => {
-//         res.status(400).json(err);
-//       });
-//   });
-
-//   //   create exercise
-//   router.post("/api/workouts", ({ body }, res) => {
-//     Workout.create(body)
-//       .then((dbWorkout) => {
-//         res.json(dbWorkout);
-//       })
-//       .catch((err) => {
-//         res.status(400).json(err);
-//       });
-//   });
-
-//
-//   app.get("/api/workouts/range", ({ body }, res) => {
-//     Fitness.find(body)
-//       .then((dbFitness) => {
-//         res.json(dbFitness);
-//       })
-//       .catch((err) => {
-//         res.status(400).json(err);
-//       });
-//   });
-// };
-
-// =====================================================
-
 const router = require("express").Router();
 const WO = require("../models/model.js");
 const path = require("path");
@@ -109,7 +40,7 @@ router.post("/api/workouts", ({ body }, res) => {
 
 //add excerise to created workout
 router.put("/api/workouts/:id", ({ params, body }, res) => {
-  WOinsertMany(body)
+  WO.insertMany(body)
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
