@@ -31,17 +31,6 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
-//create new workout
-router.post("/api/workouts", ({ body }, res) => {
-  WO.create(body)
-    .then((dbWorkout) => {
-      res.json(dbWorkout);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
-});
-
 //add excerise to created workout
 router.put("/api/workouts/:id", (req, res) => {
   WO.findOneAndUpdate(
